@@ -53,7 +53,7 @@ exports.login = async (req, res) => {
     const refreshToken = generateRefreshToken(user);
     const refreshExpiry = new Date(); refreshExpiry.setDate(refreshExpiry.getDate() + 7);
     await User.saveRefreshToken(user.id, refreshToken, refreshExpiry);
-    res.json({ accessToken, refreshToken, user: { id: user.id, email: user.email, name: user.name, role: user.role, isPremium: user.isPremium }});
+    res.json({ message: 'Login successful', accessToken, refreshToken, user: { id: user.id, email: user.email, name: user.name, role: user.role, isPremium: user.isPremium }});
   } catch (error) {
     res.status(500).json({ error: { code: 'INTERNAL_ERROR', message: 'Login failed', timestamp: new Date().toISOString(), path: req.path }});
   }
